@@ -16,7 +16,7 @@ Retrieval-Augmented Generation (RAG) application for interacting with YouTube vi
 
 ## Setup Instructions
 ### Prerequisites
-- Python 3.10 or later
+- Python 3.9 
 - Pinecone API Key
 - OpenAI API Key
 ### Installation
