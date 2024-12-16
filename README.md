@@ -41,6 +41,7 @@ Run the backend server to handle queries and transcriptions:
 python app.py
 ```
 By default, the backend runs at http://127.0.0.1:8001.
+
 2. Launch the Streamlit client
 Run the client to interact with the app:
 ```bash
