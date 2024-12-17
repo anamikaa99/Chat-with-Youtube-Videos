@@ -10,6 +10,22 @@ Retrieval-Augmented Generation (RAG) application for interacting with YouTube vi
 - 🖥️ Streamlit Frontend: Interactive UI for querying video content and exploring answers.
 - 🐳 Dockerized Deployment: Fully containerized with Docker for consistent performance across environments
 
+  ---
+
+## **Project Structure**
+
+```plaintext
+Chat-with-Youtube-Videos/
+├── app.py                     # FastAPI backend for transcription & Q&A
+├── client.py                  # Streamlit frontend for interactive Q&A
+├── transcription.txt          # Sample transcription file for querying
+├── requirements.txt           # Dependencies for the app
+├── Dockerfile                 # Dockerfile to containerize the app
+└── .gitignore                 # Files to ignore in version control
+```
+
+---
+
 ## How it works
 1. Transcription: Whisper AI transcribes video content into text.
 2. Chunking & Embedding: Transcriptions are split into smaller chunks and embedded using OpenAI's embedding models.
@@ -23,7 +39,55 @@ Retrieval-Augmented Generation (RAG) application for interacting with YouTube vi
 - Pinecone API Key
 - OpenAI API Key
 
-## Installation 
+  
+## Run the App with Docker
+
+You can run the app directly from Docker Hub without cloning the repository.
+
+### 1. Pull the Docker Image
+Pull the latest image from Docker Hub:
+
+```bash
+docker pull anamikasingh99/rag-app:latest
+```
+
+---
+
+### 2. Create a `.env` File
+To securely pass API keys, create a `.env` file in your local directory with the following content:
+
+```plaintext
+OPENAI_API_KEY=your_openai_api_key
+PINECONE_API_KEY=your_pinecone_api_key
+```
+
+Replace `your_openai_api_key` and `your_pinecone_api_key` with your actual API keys.
+
+---
+
+### 3. Run the Container
+Run the container with port mappings and the `.env` file:
+
+```bash
+docker run -p 8001:8001 -p 8501:8501 --env-file .env anamikasingh/rag-app:latest
+```
+
+- **FastAPI Backend** will be accessible at:
+  ```
+  http://localhost:8001/docs
+  ```
+
+- **Streamlit Frontend** will be available at:
+  ```
+  http://localhost:8501
+  ```
+
+---
+
+
+  
+## Deployment without Docker
+
 1. Clone the repository:
  ```bash
 git clone https://github.com/anamikaa99/Chat-with-Youtube-Videos.git
@@ -36,49 +100,21 @@ Store your API keys securely in a .env file in the root directory:
 OPENAI_API_KEY=your_openai_api_key
 PINECONE_API_KEY=your_pinecone_api_key
 ```
-  
-## Dockerized Deployment 
 
 
-1. Build the Docker Image
-
-Run the following command to build the Docker image:
- ```bash
-docker build -t rag-app .
-```
-2. Run the Container
-
-Start the container using the .env file and map the ports
- ```bash
-docker run -p 8001:8001 -p 8501:8501 --env-file .env rag-app
-```
-3. Access the app
-
-- Streamlit Frontend: Open your browser and visit:
-```plaintext
-http://localhost:8501
-```
-- FastAPI Backend: Explore the API documentation:
-```plaintext
-http://localhost:8001/docs
-```
-  
-## Deployment without Docker
-
-
-1. Install the required dependencies:
+3. Install the required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Start the FastAPI Backend
+4. Start the FastAPI Backend
 Run the backend server to handle queries and transcriptions:
 ```bash
 python app.py
 ```
 By default, the backend runs at http://0.0.0.0:8001.
 
-3. Launch the Streamlit client
+4. Launch the Streamlit client
 Run the client to interact with the app:
 ```bash
 streamlit run client.py
