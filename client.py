@@ -8,8 +8,8 @@ def get_response(input_text):
         # Send the input to FastAPI
         payload = {"input": input_text}
         response = requests.post(
-            "http://host.docker.internal:8001/podcastprompt/invoke",
-            # "http://127.0.0.1:8001/podcastprompt/invoke",
+            "http://host.docker.internal:8001/podcastprompt/invoke", # COMMENT THIS WHEN HOSTING ON LOCAL MACHINE WITHOUT DOCKER
+            # "http://127.0.0.1:8001/podcastprompt/invoke", # UNCOMMENT THIS TO HOST ON YOUR LOCAL MACHINE WITHOUT DOCKER
             json=payload
         )
         response.raise_for_status()  # Raise an error for HTTP issues
